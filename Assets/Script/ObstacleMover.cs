@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ObstacleMover : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class ObstacleMover : MonoBehaviour
     {
         moveDirection = direction.normalized;
         moveSpeed = speed;
+        Invoke("OnBecameInvisible", 10);
     }
 
     void Update()
@@ -28,5 +31,6 @@ public class ObstacleMover : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+        //Debug.Log("Destroy");
     }
 }
