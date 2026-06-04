@@ -2277,6 +2277,14 @@ PrefabInstance:
       propertyPath: m_ProvidesContacts
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6021125566649351628, guid: 5c536276942244699bd5aaeb546a53b2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a869215be354647ada16f1a768248845, type: 2}
+    - target: {fileID: 6021125566649351628, guid: 5c536276942244699bd5aaeb546a53b2, type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7081494053418320367, guid: 5c536276942244699bd5aaeb546a53b2, type: 3}
       propertyPath: moveSpeed
       value: 25
