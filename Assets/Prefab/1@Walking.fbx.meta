@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8c86564f0ec8146d7b77174bbcc92293
+guid: 07af61d0f48aa4d168c2329ea8ea1a25
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -31,7 +31,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Walking
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
@@ -337,18 +337,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Walking(Clone)
+    - name: 1@Walking(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: tmp4qr3cqw4obj
-      parentName: Walking(Clone)
+      parentName: 1@Walking(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
       scale: {x: 100, y: 100, z: 100}
     - name: mixamorig:Hips
-      parentName: Walking(Clone)
+      parentName: 1@Walking(Clone)
       position: {x: 0.00010204099, y: 0.29281136, z: 0.0005139373}
       rotation: {x: -6.766472e-10, y: 0.0019451191, z: -0.00000002234519, w: 0.9999981}
       scale: {x: 1, y: 0.99999994, z: 1}
