@@ -470,7 +470,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 271eac6fc37274ceabd6308ad6e0a2fc, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a869215be354647ada16f1a768248845, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -535,7 +535,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!4 &2941851629968525126 stripped
 Transform:

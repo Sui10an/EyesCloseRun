@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("タイマー設定")]
     private float timeLimit = 90f;
     private float timeRemaining;
-    public static bool isGameActive = false;
+    private bool isGameActive = false;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI lifeText;       // ← TextMeshProUGUIに変更
@@ -22,8 +22,6 @@ public class GameManager : MonoBehaviour
 
     private Transform player;
     private bool isGameOver = false;
-
-    private float start_z;
 
     private void Awake()
     {
@@ -37,7 +35,6 @@ public class GameManager : MonoBehaviour
         timeRemaining = timeLimit;
         isGameActive = true;
         player = FindFirstObjectByType<PlayerController>().transform;
-        start_z = player.position.z;
         UpdateLifeUI();
     }
 
@@ -87,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     private int CalculateScore()
     {
-        float distanceZ = player != null ? player.position.z - start_z : 0f;
+        float distanceZ = player != null ? player.position.z : 0f;
         int distanceScore = Mathf.FloorToInt(distanceZ) * 10;
         int lifeBonus = currentLife * 500;
         return distanceScore + lifeBonus;
@@ -106,7 +103,7 @@ public class GameManager : MonoBehaviour
         if (finalScoreText != null)
             finalScoreText.text =
                 $"スコア：{score}\n" +
-                $"進んだ距離：{Mathf.FloorToInt(player.position.z - start_z)}m\n" +
+                $"進んだ距離：{Mathf.FloorToInt(player.position.z)}m\n" +
                 $"残りHP：{currentLife}/{maxLife}";
     }
 
