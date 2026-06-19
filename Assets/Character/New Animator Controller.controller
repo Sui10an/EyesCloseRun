@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1107 &-8074563864520753089
 AnimatorStateMachine:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -46,7 +46,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 16b8f2cc09ba844b1a0a5bdf7db41f36, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 271eac6fc37274ceabd6308ad6e0a2fc, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -59,7 +59,7 @@ AnimatorController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Animator Controller
-  serializedVersion: 5
+  serializedVersion: 6
   m_AnimatorParameters:
   - m_Name: isWalking
     m_Type: 4
@@ -80,6 +80,7 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+  m_EvaluateTransitionsOnStart: 0
 --- !u!1101 &6771227963869179379
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -151,7 +152,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: d0c24032ad0164a97bf8e512fec81386, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: eeff990cd74324db8ae3e4cd816ca94c, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

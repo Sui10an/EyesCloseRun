@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("タイマー設定")]
     private float timeLimit = 90f;
     private float timeRemaining;
-    private bool isGameActive = false;
+    public static bool isGameActive = false;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI lifeText;       // ← TextMeshProUGUIに変更
