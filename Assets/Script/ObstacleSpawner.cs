@@ -3,6 +3,7 @@ using UnityEngine;
 public class ObstacleSpawner : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    public Transform spawnPoint;
 
     public float bulletSpeed = 10f;
 
@@ -25,8 +26,8 @@ public class ObstacleSpawner : MonoBehaviour
     {
         GameObject bullet = Instantiate(
             bulletPrefab,
-            transform.position,
-            Quaternion.identity
+            spawnPoint.position,
+            spawnPoint.rotation
         );
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
