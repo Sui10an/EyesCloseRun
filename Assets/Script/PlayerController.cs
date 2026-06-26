@@ -11,13 +11,13 @@ public class PlayerController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
         if ((BlinkDetector.isclose || Input.GetKey(KeyCode.W)) && GameManager.isGameActive == true)
         {
             animator.SetBool("isWalking", true);
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime, Space.World);
-            Debug.Log("Go!!");
+            // Debug.Log("Go!!");
         }
         else
         {

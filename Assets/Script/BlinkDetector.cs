@@ -25,6 +25,16 @@ public class BlinkDetector : MonoBehaviour
         if (result.faceLandmarks == null ||
             result.faceLandmarks.Count == 0)
         {
+            if (blinking)
+            {
+                blinking = false;
+                ExecuteEvents.Execute(
+                    targetButton.gameObject,
+                    new PointerEventData(EventSystem.current),
+                    ExecuteEvents.pointerUpHandler
+                );
+            }
+            isclose = false;
             return;
         }
 
@@ -63,7 +73,7 @@ public class BlinkDetector : MonoBehaviour
         // 両目閉じ
         bool isBlink = isLeftClosed && isRightClosed;
 
-        //Debug.Log("EyeOpen: " + eyeOpen);
+        Debug.Log(isBlink);
 
         if (isBlink)
         {
