@@ -18,14 +18,14 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.root.SetParent(transform);
+            collision.transform.parent.SetParent(transform);
         }
     }
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.root.SetParent(null);
+            collision.transform.parent.SetParent(null);
         }
     }
 }
