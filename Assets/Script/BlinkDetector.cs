@@ -25,16 +25,22 @@ public class BlinkDetector : MonoBehaviour
         if (result.faceLandmarks == null ||
             result.faceLandmarks.Count == 0)
         {
+
+            // ★ 顔が消えたときの処理を追加
             if (blinking)
             {
                 blinking = false;
+                isclose = false;
+
+                Debug.Log("顔消えた → 停止");
+
                 ExecuteEvents.Execute(
                     targetButton.gameObject,
                     new PointerEventData(EventSystem.current),
                     ExecuteEvents.pointerUpHandler
                 );
             }
-            isclose = false;
+
             return;
         }
 
@@ -70,10 +76,40 @@ public class BlinkDetector : MonoBehaviour
         bool isLeftClosed = leftEyeOpen < threshold;
         bool isRightClosed = rightEyeOpen < threshold;
 
+        var nose = landmarks[1];
+        var leftCheek = landmarks[234];
+        var rightCheek = landmarks[454];
+
+        float leftDist = Mathf.Abs(nose.x - leftCheek.x);
+        float rightDist = Mathf.Abs(rightCheek.x - nose.x);
+
+        // 左右の距離比
+        float ratio = leftDist / rightDist;
+
+        bool faceFront = ratio > 0.6f && ratio < 1.3f;
+
+        Debug.Log(faceFront);
+
         // 両目閉じ
         bool isBlink = isLeftClosed && isRightClosed;
 
-        Debug.Log(isBlink);
+        if (faceFront == false)
+        {
+            // 横を向いているので解除
+            if (blinking)
+            {
+                blinking = false;
+                isclose = false;
+
+                ExecuteEvents.Execute(
+                    targetButton.gameObject,
+                    new PointerEventData(EventSystem.current),
+                    ExecuteEvents.pointerUpHandler
+                );
+            }
+
+            return;
+        }
 
         if (isBlink)
         {
