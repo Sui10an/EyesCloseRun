@@ -961,6 +961,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231381626}
   m_CullTransparentMesh: 1
+--- !u!1 &313549933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7465461064596, guid: 71e76f894c6544dcd87d0180692d1473, type: 3}
+  m_PrefabInstance: {fileID: 874392055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &313549938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313549933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06eb467db85eb42ac88b6f151216dc51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomGravity
+  gravityMultiplier: 15
 --- !u!4 &349443313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7557875980804431503, guid: 4fd3abaf99d35421e9a1f9612303ba49, type: 3}
@@ -1542,6 +1560,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3527397991583172774, guid: 71e76f894c6544dcd87d0180692d1473, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527397991583172774, guid: 71e76f894c6544dcd87d0180692d1473, type: 3}
       propertyPath: m_Constraints
       value: 122
       objectReference: {fileID: 0}
@@ -1564,7 +1586,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7465461064596, guid: 71e76f894c6544dcd87d0180692d1473, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 313549938}
   m_SourcePrefab: {fileID: 100100000, guid: 71e76f894c6544dcd87d0180692d1473, type: 3}
 --- !u!4 &941903447 stripped
 Transform:
