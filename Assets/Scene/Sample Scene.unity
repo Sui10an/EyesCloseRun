@@ -3582,6 +3582,10 @@ PrefabInstance:
       propertyPath: speed
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 4507167422098356774, guid: 807cd43cd19bf43f8bfe9fe1f812bbf9, type: 3}
+      propertyPath: textureScrollScale
+      value: 0.005
+      objectReference: {fileID: 0}
     - target: {fileID: 5058228631570629073, guid: 807cd43cd19bf43f8bfe9fe1f812bbf9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
