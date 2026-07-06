@@ -19,6 +19,8 @@ namespace Mediapipe.Unity.Sample.PoseLandmarkDetection
 
     public readonly PoseLandmarkDetectionConfig config = new PoseLandmarkDetectionConfig();
 
+    public PoseLandmarkerResult Result;
+
     public override void Stop()
     {
       base.Stop();
@@ -133,6 +135,7 @@ namespace Mediapipe.Unity.Sample.PoseLandmarkDetection
           case Tasks.Vision.Core.RunningMode.IMAGE:
             if (taskApi.TryDetect(image, imageProcessingOptions, ref result))
             {
+              Result = result;
               _poseLandmarkerResultAnnotationController.DrawNow(result);
             }
             else
@@ -144,6 +147,7 @@ namespace Mediapipe.Unity.Sample.PoseLandmarkDetection
           case Tasks.Vision.Core.RunningMode.VIDEO:
             if (taskApi.TryDetectForVideo(image, GetCurrentTimestampMillisec(), imageProcessingOptions, ref result))
             {
+              Result = result;
               _poseLandmarkerResultAnnotationController.DrawNow(result);
             }
             else

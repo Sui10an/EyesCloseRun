@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     private Animator animator;
+    public Rigidbody rb;
+    public float jumpPower = 5f;
 
     void Start()
     {
@@ -22,6 +24,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("isWalking", false);
+        }
+
+        if ((ArmUpDetector.wasJump || Input.GetKey(KeyCode.Space)) && GameManager.isGameActive == true)
+        {
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
     }
 }

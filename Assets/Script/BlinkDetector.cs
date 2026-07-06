@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class BlinkDetector : MonoBehaviour
 {
     public FaceLandmarkerRunner runner;
-    public Button targetButton;
+    //public Button targetButton;
 
     float threshold = 0.012f;
     private bool blinking = false;
@@ -118,11 +118,11 @@ public class BlinkDetector : MonoBehaviour
                 blinking = true;
                 Debug.Log("BLINK");
 
-                ExecuteEvents.Execute(
-                    targetButton.gameObject,
-                    new PointerEventData(EventSystem.current),
-                    ExecuteEvents.pointerDownHandler
-                );
+                // ExecuteEvents.Execute(
+                //     targetButton.gameObject,
+                //     new PointerEventData(EventSystem.current),
+                //     ExecuteEvents.pointerDownHandler
+                // );
             }
             isclose = true;
             Debug.Log("目を閉じてる！");
@@ -132,11 +132,11 @@ public class BlinkDetector : MonoBehaviour
             if (blinking)
             {
                 blinking = false;
-                ExecuteEvents.Execute(
-                    targetButton.gameObject,
-                    new PointerEventData(EventSystem.current),
-                    ExecuteEvents.pointerUpHandler
-                );
+                // ExecuteEvents.Execute(
+                //     targetButton.gameObject,
+                //     new PointerEventData(EventSystem.current),
+                //     ExecuteEvents.pointerUpHandler
+                // );
             }
             isclose = false;
         }
