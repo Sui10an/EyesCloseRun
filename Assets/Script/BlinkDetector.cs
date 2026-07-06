@@ -34,11 +34,11 @@ public class BlinkDetector : MonoBehaviour
 
                 Debug.Log("顔消えた → 停止");
 
-                ExecuteEvents.Execute(
-                    targetButton.gameObject,
-                    new PointerEventData(EventSystem.current),
-                    ExecuteEvents.pointerUpHandler
-                );
+                // ExecuteEvents.Execute(
+                //     targetButton.gameObject,
+                //     new PointerEventData(EventSystem.current),
+                //     ExecuteEvents.pointerUpHandler
+                // );
             }
 
             return;
