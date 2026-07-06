@@ -101,11 +101,11 @@ public class BlinkDetector : MonoBehaviour
                 blinking = false;
                 isclose = false;
 
-                ExecuteEvents.Execute(
-                    targetButton.gameObject,
-                    new PointerEventData(EventSystem.current),
-                    ExecuteEvents.pointerUpHandler
-                );
+                // ExecuteEvents.Execute(
+                //     targetButton.gameObject,
+                //     new PointerEventData(EventSystem.current),
+                //     ExecuteEvents.pointerUpHandler
+                // );
             }
 
             return;
