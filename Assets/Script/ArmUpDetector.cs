@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class ArmUpDetector : MonoBehaviour
 {
     public PoseLandmarkerRunner runner;
-    public Button targetButton;
+    //public Button targetButton;
 
     //float threshold = 0.012f;
     public static bool wasJump = false;

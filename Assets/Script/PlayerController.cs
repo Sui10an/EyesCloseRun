@@ -4,9 +4,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] public float jumpPower = 5f;
     private Animator animator;
     public Rigidbody rb;
-    public float jumpPower = 5f;
+    public bool isJumping = true;
+
 
     void Start()
     {
@@ -26,8 +28,10 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isWalking", false);
         }
 
-        if ((ArmUpDetector.wasJump || Input.GetKey(KeyCode.Space)) && GameManager.isGameActive == true)
+        if ((ArmUpDetector.wasJump || Input.GetKey(KeyCode.Space)) &&
+            (GameManager.isGameActive && isJumping) == true)
         {
+            Debug.Log("Jump!!");
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
     }

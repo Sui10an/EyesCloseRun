@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Global Resource
   - Remover
+  - Floor
   layers:
   - Default
   - TransparentFX
