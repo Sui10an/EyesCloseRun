@@ -28,11 +28,11 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isWalking", false);
         }
 
-        if ((ArmUpDetector.wasJump || Input.GetKey(KeyCode.Space)) &&
-            (GameManager.isGameActive && isJumping) == true)
-        {
-            Debug.Log("Jump!!");
-            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-        }
+        // if ((ArmUpDetector.wasJump || Input.GetKey(KeyCode.Space)) &&
+        //     (GameManager.isGameActive && isJumping) == true)
+        // {
+        //     Debug.Log("Jump!!");
+        //     rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        // }
     }
 }
