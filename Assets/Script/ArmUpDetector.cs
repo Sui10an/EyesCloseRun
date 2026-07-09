@@ -7,29 +7,38 @@ using UnityEngine.EventSystems;
 public class ArmUpDetector : MonoBehaviour
 {
     public PoseLandmarkerRunner runner;
-    //public Button targetButton;
 
-    //float threshold = 0.012f;
     public static bool wasJump = false;
 
 
     void Update()
     {
-        //Debug.Log(runner);
+        Debug.Log(runner.name);
+
         if (runner == null)
             return;
 
         var result = runner.Result;
 
-
         if (result.poseLandmarks == null ||
             result.poseLandmarks.Count == 0)
         {
-
+            if (result.poseLandmarks == null)
+            {
+                Debug.Log("PoseLandmarks is null");
+                return;
+            }
+            if (result.poseLandmarks.Count == 0)
+            {
+                Debug.Log("PoseLandmarks count is 0");
+                return;
+            }
             return;
         }
 
-        // 顔ランドマーク取得
+        Debug.Log("Pose Detected");
+
+        // ランドマーク取得
         var pose = result.poseLandmarks[0];
         // foreach (var member in pose.GetType().GetMembers())
         // {
@@ -38,6 +47,7 @@ public class ArmUpDetector : MonoBehaviour
 
         // ★ここが正解
         var landmarks = pose.landmarks;
+        // Debug.Log("Pose Detected");
 
         var leftShoulder = landmarks[11];
         var leftWrist = landmarks[15];
@@ -49,7 +59,9 @@ public class ArmUpDetector : MonoBehaviour
         bool rightHandUp = rightWrist.y < rightShoulder.y;
 
         // 
-        bool jump = leftHandUp && rightHandUp;
+        bool jump = leftHandUp || rightHandUp;
+
+        // Debug.Log($"Left: {leftHandUp}, Right: {rightHandUp}");
 
 
         if (jump && !wasJump)
