@@ -3130,7 +3130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5898ee43ecb144aea84110680530806f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  maxLife: 5
+  maxLife: 10
   lifeText: {fileID: 2142464821}
   timerText: {fileID: 2146288504}
   finalScoreText: {fileID: 1185306151}
