@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;  // TextMeshPro用
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -103,13 +104,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameClear()
-{
-    if (!isGameActive || isGameOver) return;
-    isCleared = true;
-    Time.timeScale = 0f;   // プレイヤーやアニメも止める
-    EndGame();
-}
-private void EndGame()
+    {
+        if (!isGameActive || isGameOver) return;
+        isCleared = true;
+        Time.timeScale = 0f;   // プレイヤーやアニメも止める
+        EndGame();
+    }
+    private void EndGame()
     {
         isGameOver = true;
         isGameActive = false;
@@ -133,8 +134,14 @@ private void EndGame()
     public void Retry()
     {
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().name);
+    }
+    public void RemoveTitle()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(
+            "TitleScene");
     }
 
     public bool IsGameOver => isGameOver;
