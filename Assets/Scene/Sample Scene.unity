@@ -1135,7 +1135,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4507167422098356774, guid: 807cd43cd19bf43f8bfe9fe1f812bbf9, type: 3}
       propertyPath: speed
-      value: -30
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4507167422098356774, guid: 807cd43cd19bf43f8bfe9fe1f812bbf9, type: 3}
       propertyPath: upRotation
