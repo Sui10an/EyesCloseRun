@@ -20,8 +20,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI finalScoreText; // ← 同上
     [SerializeField] private GameObject gameOverPanel;
 
+    [Header("クリア設定")]
+    [SerializeField] private int timeBonusPerSecond = 100; // クリア時の残り時間ボーナス(1秒あたり)
+
     private Transform player;
     private bool isGameOver = false;
+    private bool isCleared = false;
 
     float start_z;
 
@@ -90,10 +94,22 @@ public class GameManager : MonoBehaviour
         float distanceZ = player != null ? player.position.z - start_z : 0f;
         int distanceScore = Mathf.FloorToInt(distanceZ) * 10;
         int lifeBonus = currentLife * 500;
-        return distanceScore + lifeBonus;
+        int score = distanceScore + lifeBonus;
+
+        if (isCleared)
+            score += Mathf.FloorToInt(timeRemaining) * timeBonusPerSecond;
+
+        return score;
     }
 
-    private void EndGame()
+    public void GameClear()
+{
+    if (!isGameActive || isGameOver) return;
+    isCleared = true;
+    Time.timeScale = 0f;   // プレイヤーやアニメも止める
+    EndGame();
+}
+private void EndGame()
     {
         isGameOver = true;
         isGameActive = false;
@@ -104,14 +120,19 @@ public class GameManager : MonoBehaviour
             gameOverPanel.SetActive(true);
 
         if (finalScoreText != null)
+        {
+            string title = isCleared ? "GAME CLEAR!" : "GAME OVER";
             finalScoreText.text =
+                $"{title}\n" +
                 $"スコア：{score}\n" +
                 $"進んだ距離：{Mathf.FloorToInt(player.position.z - start_z)}m\n" +
                 $"残りHP：{currentLife}/{maxLife}";
+        }
     }
 
     public void Retry()
     {
+        Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
