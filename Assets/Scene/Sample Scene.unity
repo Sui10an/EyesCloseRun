@@ -5597,6 +5597,8 @@ MonoBehaviour:
   timeBonusPerSecond: 100
   audioSource: {fileID: 1625655145}
   damageSound: {fileID: 8300000, guid: ab1ae053914044391b527e0ba1447b48, type: 3}
+  clearSound: {fileID: 8300000, guid: da5dc32087eb34e0fa2464858e9baafc, type: 3}
+  gameOverSound: {fileID: 8300000, guid: a1ec0c68e33124175bb2cfc0b978ff31, type: 3}
 --- !u!114 &1625655144
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     [Header("サウンド")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip damageSound;
+    [SerializeField] private AudioClip clearSound;
+    [SerializeField] private AudioClip gameOverSound;
 
     private Transform player;
     private bool isGameOver = false;
@@ -117,16 +119,18 @@ public class GameManager : MonoBehaviour
         currentLife--;
         UpdateLifeUI();
 
-        // ★追加:ダメージSEを再生
+        if (currentLife <= 0)
+        {
+            // ライフ0の時は被弾音を鳴らさない(EndGame内でゲームオーバー音が鳴る)
+            currentLife = 0;
+            EndGame();
+            return;
+        }
+
+        // ★ライフが残っている時だけダメージSEを再生
         if (audioSource != null && damageSound != null)
         {
             audioSource.PlayOneShot(damageSound);
-        }
-
-        if (currentLife <= 0)
-        {
-            currentLife = 0;
-            EndGame();
         }
     }
 
@@ -147,6 +151,13 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameActive || isGameOver) return;
         isCleared = true;
+
+        // ★追加:クリアSEを再生
+        if (audioSource != null && clearSound != null)
+        {
+            audioSource.PlayOneShot(clearSound);
+        }
+
         Time.timeScale = 0f;   // プレイヤーやアニメも止める
         EndGame();
     }
@@ -155,6 +166,12 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         isGameActive = false;
+
+        // ★追加:ゲームオーバーSE(クリア時はGameClear側でクリアSEが鳴るので鳴らさない)
+        if (!isCleared && audioSource != null && gameOverSound != null)
+        {
+            audioSource.PlayOneShot(gameOverSound);
+        }
 
         int score = CalculateScore();
 
