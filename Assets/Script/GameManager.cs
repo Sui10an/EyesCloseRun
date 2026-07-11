@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     [Header("クリア設定")]
     [SerializeField] private int timeBonusPerSecond = 100; // クリア時の残り時間ボーナス(1秒あたり)
 
+    [Header("サウンド")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip damageSound;
+
     private Transform player;
     private bool isGameOver = false;
     private bool isCleared = false;
@@ -112,6 +116,13 @@ public class GameManager : MonoBehaviour
         if (!isGameActive || isGameOver) return;
         currentLife--;
         UpdateLifeUI();
+
+        // ★追加:ダメージSEを再生
+        if (audioSource != null && damageSound != null)
+        {
+            audioSource.PlayOneShot(damageSound);
+        }
+
         if (currentLife <= 0)
         {
             currentLife = 0;
