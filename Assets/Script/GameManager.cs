@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;   // プレイヤーやアニメも止める
         EndGame();
     }
+
     private void EndGame()
     {
         isGameOver = true;
@@ -117,14 +118,24 @@ public class GameManager : MonoBehaviour
 
         int score = CalculateScore();
 
+        // ★ここから追加:ランキングに登録して順位を取得
+        int rank = RankingManager.AddScore(score, isCleared);
+        RankingDisplay.lastRank = rank;
+        // ★ここまで追加
+
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
 
         if (finalScoreText != null)
         {
             string title = isCleared ? "GAME CLEAR!" : "GAME OVER";
+
+            // ★追加:ランクインしていれば順位の行を作る
+            string rankLine = rank > 0 ? $"ランキング {rank}位!\n" : "";
+
             finalScoreText.text =
                 $"{title}\n" +
+                rankLine +                                                     // ★追加
                 $"スコア：{score}\n" +
                 $"進んだ距離：{Mathf.FloorToInt(player.position.z - start_z)}m\n" +
                 $"残りHP：{currentLife}/{maxLife}";
