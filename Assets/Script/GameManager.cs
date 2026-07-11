@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;  // TextMeshPro用
 using UnityEngine.SceneManagement;
@@ -21,6 +22,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI finalScoreText; // ← 同上
     [SerializeField] private GameObject gameOverPanel;
 
+    [Header("カウントダウン設定")]
+    [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private int countdownSeconds = 3;
+    [SerializeField] private string startMessage = "START!";
+    [SerializeField] private float startMessageDuration = 0.5f;
+
     [Header("クリア設定")]
     [SerializeField] private int timeBonusPerSecond = 100; // クリア時の残り時間ボーナス(1秒あたり)
 
@@ -40,10 +47,32 @@ public class GameManager : MonoBehaviour
     {
         currentLife = maxLife;
         timeRemaining = timeLimit;
-        isGameActive = true;
+        isGameActive = false; // カウントダウンが終わるまで動けない
         player = FindFirstObjectByType<PlayerController>().transform;
         start_z = player.position.z;
         UpdateLifeUI();
+
+        StartCoroutine(CountdownRoutine());
+    }
+
+    private IEnumerator CountdownRoutine()
+    {
+        if (countdownText != null) countdownText.gameObject.SetActive(true);
+
+        for (int i = countdownSeconds; i > 0; i--)
+        {
+            if (countdownText != null) countdownText.text = i.ToString();
+            yield return new WaitForSeconds(1f);
+        }
+
+        if (countdownText != null)
+        {
+            countdownText.text = startMessage;
+            yield return new WaitForSeconds(startMessageDuration);
+            countdownText.gameObject.SetActive(false);
+        }
+
+        isGameActive = true;
     }
 
     private void Update()
