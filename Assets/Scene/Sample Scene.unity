@@ -8050,6 +8050,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConveyorFloor
       objectReference: {fileID: 0}
+    - target: {fileID: 7709088268315194584, guid: 807cd43cd19bf43f8bfe9fe1f812bbf9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
