@@ -37,11 +37,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip clearSound;
     [SerializeField] private AudioClip gameOverSound;
 
+    [Header("その他")]
+    [SerializeField] private Transform goalPrefab;
     private Transform player;
     private bool isGameOver = false;
     private bool isCleared = false;
 
     float start_z;
+    float goal_z;
 
     private void Awake()
     {
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
         isGameActive = false; // カウントダウンが終わるまで動けない
         player = FindFirstObjectByType<PlayerController>().transform;
         start_z = player.position.z;
+        goal_z = goalPrefab.transform.position.z;
         UpdateLifeUI();
 
         StartCoroutine(CountdownRoutine());
@@ -194,7 +198,7 @@ public class GameManager : MonoBehaviour
                 $"{title}\n" +
                 rankLine +                                                     // ★追加
                 $"スコア：{score}\n" +
-                $"進んだ距離：{Mathf.FloorToInt(player.position.z - start_z)}m\n" +
+                $"ゴールまでの距離：{Mathf.FloorToInt(goal_z - player.position.z)}m\n" +
                 $"残りHP：{currentLife}/{maxLife}";
         }
     }

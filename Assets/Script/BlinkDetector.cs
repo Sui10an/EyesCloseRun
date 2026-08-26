@@ -8,6 +8,7 @@ using Mediapipe.Unity.Sample.FaceLandmarkDetection;
 public class BlinkDetector : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI blinkText;
+    [SerializeField] private GameObject open, closed;
     public FaceLandmarkerRunner runner;
 
     // EAR風の閾値
@@ -131,6 +132,8 @@ public class BlinkDetector : MonoBehaviour
             if (blinkText != null)
             {
                 blinkText.text = "目を閉じてる！";
+                open.SetActive(false);
+                closed.SetActive(true);
             }
         }
         else
@@ -145,6 +148,8 @@ public class BlinkDetector : MonoBehaviour
             if (blinkText != null)
             {
                 blinkText.text = "目が開いている！";
+                open.SetActive(true);
+                closed.SetActive(false);
             }
         }
 
