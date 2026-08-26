@@ -97,6 +97,10 @@ public class GameManager : MonoBehaviour
             timeRemaining = 0f;
             EndGame();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            RemoveTitle();
+        }
     }
 
     private void UpdateLifeUI()
