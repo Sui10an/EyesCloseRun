@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(timeRemaining / 60f);
         int seconds = Mathf.FloorToInt(timeRemaining % 60f);
         timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
-        timerText.color = (timeRemaining <= 10f) ? Color.red : Color.white;
+        timerText.color = (timeRemaining <= 10f) ? Color.red : Color.black;
     }
 
     public void TakeDamage()
