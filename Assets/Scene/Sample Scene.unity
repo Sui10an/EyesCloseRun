@@ -4350,6 +4350,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 313549941}
     - target: {fileID: 3163833207893090671, guid: 71e76f894c6544dcd87d0180692d1473, type: 3}
+      propertyPath: backSpeed
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163833207893090671, guid: 71e76f894c6544dcd87d0180692d1473, type: 3}
       propertyPath: jumpPower
       value: 15
       objectReference: {fileID: 0}
@@ -4742,7 +4746,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3259285889726014649, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
       propertyPath: m_Pivot.x
@@ -7445,7 +7449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1381828316
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8649,8 +8653,8 @@ MonoBehaviour:
   open: {fileID: 1303323344}
   closed: {fileID: 1162825296}
   runner: {fileID: 1883286499}
-  eyeCloseThreshold: 0.03
-  minFaceWidth: 0.15
+  eyeCloseThreshold: 0.05
+  minFaceWidth: 0.2
   blinkFramesRequired: 3
 --- !u!114 &1625655143
 MonoBehaviour:

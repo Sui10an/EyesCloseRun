@@ -24,6 +24,7 @@ public class BlinkDetector : MonoBehaviour
     private bool blinking = false;
 
     public static bool isclose = false;
+    public static bool isotherclose = false;
 
     void Update()
     {
@@ -104,10 +105,11 @@ public class BlinkDetector : MonoBehaviour
         }
 
         bool isBlink = isLeftClosed && isRightClosed;
+        bool isOtherclose = isLeftClosed || isRightClosed;
 
         // ===== フレームフィルタ =====
 
-        if (isBlink)
+        if (isBlink || isOtherclose)
         {
             blinkFrameCount++;
         }
@@ -126,14 +128,29 @@ public class BlinkDetector : MonoBehaviour
                 blinking = true;
                 Debug.Log("BLINK");
             }
-
-            isclose = true;
-
-            if (blinkText != null)
+            if (isBlink)
             {
-                blinkText.text = "目を閉じてる！";
-                open.SetActive(false);
-                closed.SetActive(true);
+                isclose = true;
+                isotherclose = false;
+
+                if (blinkText != null)
+                {
+                    blinkText.text = "目を閉じてる！";
+                    open.SetActive(false);
+                    closed.SetActive(true);
+                }
+            }
+            else if (isOtherclose)
+            {
+                isclose = false;
+                isotherclose = true;
+
+                if (blinkText != null)
+                {
+                    blinkText.text = "片目を閉じてる！";
+                    open.SetActive(false);
+                    closed.SetActive(true);
+                }
             }
         }
         else
@@ -144,6 +161,7 @@ public class BlinkDetector : MonoBehaviour
             }
 
             isclose = false;
+            isotherclose = false;
 
             if (blinkText != null)
             {
@@ -164,6 +182,7 @@ public class BlinkDetector : MonoBehaviour
     {
         blinking = false;
         isclose = false;
+        isotherclose = false;
         blinkFrameCount = 0;
 
         if (blinkText != null)
