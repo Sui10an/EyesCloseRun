@@ -8,7 +8,7 @@ using Mediapipe.Unity.Sample.FaceLandmarkDetection;
 public class BlinkDetector : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI blinkText;
-    [SerializeField] private GameObject open, closed;
+    [SerializeField] private GameObject openR, closedR, openL, closedL;
     public FaceLandmarkerRunner runner;
 
     // EAR風の閾値
@@ -136,8 +136,10 @@ public class BlinkDetector : MonoBehaviour
                 if (blinkText != null)
                 {
                     blinkText.text = "目を閉じてる！";
-                    open.SetActive(false);
-                    closed.SetActive(true);
+                    openR.SetActive(false);
+                    closedR.SetActive(true);
+                    openL.SetActive(false);
+                    closedL.SetActive(true);
                 }
             }
             else if (isOtherclose)
@@ -148,8 +150,20 @@ public class BlinkDetector : MonoBehaviour
                 if (blinkText != null)
                 {
                     blinkText.text = "片目を閉じてる！";
-                    open.SetActive(false);
-                    closed.SetActive(true);
+                    if (isLeftClosed)
+                    {
+                        openR.SetActive(true);
+                        closedR.SetActive(false);
+                        openL.SetActive(false);
+                        closedL.SetActive(true);
+                    }
+                    if (isRightClosed)
+                    {
+                        openR.SetActive(false);
+                        closedR.SetActive(true);
+                        openL.SetActive(true);
+                        closedL.SetActive(false);
+                    }
                 }
             }
         }
@@ -166,8 +180,10 @@ public class BlinkDetector : MonoBehaviour
             if (blinkText != null)
             {
                 blinkText.text = "目が開いている！";
-                open.SetActive(true);
-                closed.SetActive(false);
+                openR.SetActive(true);
+                closedR.SetActive(false);
+                openL.SetActive(true);
+                closedL.SetActive(false);
             }
         }
 
