@@ -8975,7 +8975,7 @@ MonoBehaviour:
   closedL: {fileID: 1790660662}
   runner: {fileID: 1883286499}
   eyeCloseThreshold: 0.05
-  minFaceWidth: 0.2
+  minFaceWidth: 0.1
   blinkFramesRequired: 3
 --- !u!114 &1625655143
 MonoBehaviour:

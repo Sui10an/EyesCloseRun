@@ -2227,7 +2227,7 @@ MonoBehaviour:
   eyeCloseThreshold: 0.03
   minFaceWidth: 0.15
   blinkFramesRequired: 5
-  closeDuration: 2
+  closeDuration: 3
 --- !u!4 &1721516646
 Transform:
   m_ObjectHideFlags: 0

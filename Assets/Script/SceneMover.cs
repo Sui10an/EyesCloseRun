@@ -137,6 +137,20 @@ public class SceneMover : MonoBehaviour
             }
 
             isclose = true;
+
+            blinkTimer += Time.deltaTime;
+
+            // 指定秒数到達
+
+            if (blinkTimer >= closeDuration && !durationTriggered)
+
+            {
+
+                durationTriggered = true;
+
+                Debug.Log($"両目を {closeDuration} 秒以上閉じました！");
+
+            }
         }
         else
         {
