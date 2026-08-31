@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;  // TextMeshPro用
 using UnityEngine.SceneManagement;
 
@@ -39,12 +40,15 @@ public class GameManager : MonoBehaviour
 
     [Header("その他")]
     [SerializeField] private Transform goalPrefab;
+    public Slider gauge;
+
     private Transform player;
     private bool isGameOver = false;
     private bool isCleared = false;
 
     float start_z;
     float goal_z;
+    float startDistance;
 
     private void Awake()
     {
@@ -60,6 +64,7 @@ public class GameManager : MonoBehaviour
         player = FindFirstObjectByType<PlayerController>().transform;
         start_z = player.position.z;
         goal_z = goalPrefab.transform.position.z;
+        startDistance = Vector3.Distance(player.position, goalPrefab.position);
         UpdateLifeUI();
 
         StartCoroutine(CountdownRoutine());
@@ -101,6 +106,17 @@ public class GameManager : MonoBehaviour
         {
             RemoveTitle();
         }
+
+        float currentDistance = Vector3.Distance(player.position, goalPrefab.position);
+        // 進捗率を計算 (0～1)
+
+        float progress = 1f - (currentDistance / startDistance);
+
+        // 範囲制限
+
+        progress = Mathf.Clamp01(progress);
+
+        gauge.value = progress;
     }
 
     private void UpdateLifeUI()
