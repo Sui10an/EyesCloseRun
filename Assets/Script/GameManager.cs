@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     float start_z;
     float goal_z;
     float startDistance;
+    int autoReturn = 0;
 
     private void Awake()
     {
@@ -92,6 +93,23 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (isCleared || isGameOver)
+        {
+            autoReturn++;
+        }
+        else
+        {
+            autoReturn = 0;
+        }
+        if (autoReturn >= 10000)
+        {
+            RemoveTitle();
+        }
+        if (BlinkDetector.durationTriggered == true)
+        {
+            Retry();
+        }
+
         if (!isGameActive || isGameOver) return;
 
         timeRemaining -= Time.deltaTime;
@@ -104,6 +122,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            isGameActive = false;
             RemoveTitle();
         }
 
@@ -225,15 +244,22 @@ public class GameManager : MonoBehaviour
 
     public void Retry()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().name);
+        if (!isGameActive)
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(
+                SceneManager.GetActiveScene().name);
+        }
     }
     public void RemoveTitle()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(
-            "TitleScene");
+        if (!isGameActive)
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(
+                "TitleScene");
+        }
+
     }
 
     public bool IsGameOver => isGameOver;

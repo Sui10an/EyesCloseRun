@@ -3367,10 +3367,10 @@ RectTransform:
   m_Children:
   - {fileID: 727258560}
   - {fileID: 2146288502}
+  - {fileID: 1567415526}
   - {fileID: 1974757308}
   - {fileID: 1272813827}
   - {fileID: 1381828316}
-  - {fileID: 1567415526}
   m_Father: {fileID: 582874863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -8974,9 +8974,10 @@ MonoBehaviour:
   openL: {fileID: 1670994086}
   closedL: {fileID: 1790660662}
   runner: {fileID: 1883286499}
-  eyeCloseThreshold: 0.05
+  eyeCloseThreshold: 0.07
   minFaceWidth: 0.1
   blinkFramesRequired: 3
+  closeDuration: 3
 --- !u!114 &1625655143
 MonoBehaviour:
   m_ObjectHideFlags: 0

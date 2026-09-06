@@ -846,7 +846,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "5\u79D2\u9593\u76EE\u3092\u9589\u3058\u3066\u30B9\u30BF\u30FC\u30C8"
+  m_text: "3\u79D2\u9593\u76EE\u3092\u9589\u3058\u3066\u30B9\u30BF\u30FC\u30C8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 060b122bde46540d6a3e16f826c0a69a, type: 2}
   m_sharedMaterial: {fileID: -8055809835595807843, guid: 060b122bde46540d6a3e16f826c0a69a, type: 2}
@@ -2224,9 +2224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneMover
   runner: {fileID: 221691220}
-  eyeCloseThreshold: 0.03
-  minFaceWidth: 0.15
-  blinkFramesRequired: 5
+  eyeCloseThreshold: 0.07
+  minFaceWidth: 0.1
+  blinkFramesRequired: 3
   closeDuration: 3
 --- !u!4 &1721516646
 Transform:

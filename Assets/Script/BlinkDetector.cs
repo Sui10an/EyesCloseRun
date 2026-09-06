@@ -23,6 +23,11 @@ public class BlinkDetector : MonoBehaviour
     private int blinkFrameCount = 0;
     private bool blinking = false;
 
+    private float blinkTimer = 0f;
+    public static bool durationTriggered = false;
+    [Header("リセット時の目を閉じる時間")]
+    public float closeDuration = 3.0f;
+
     public static bool isclose = false;
     public static bool isotherclose = false;
 
@@ -126,7 +131,7 @@ public class BlinkDetector : MonoBehaviour
             if (!blinking)
             {
                 blinking = true;
-                Debug.Log("BLINK");
+                //Debug.Log("BLINK");
             }
             if (isBlink)
             {
@@ -141,11 +146,23 @@ public class BlinkDetector : MonoBehaviour
                     openL.SetActive(false);
                     closedL.SetActive(true);
                 }
+                blinkTimer += Time.deltaTime;
+
+                // 指定秒数到達
+
+                if (blinkTimer >= closeDuration && !durationTriggered)
+                {
+
+                    durationTriggered = true;
+                    Debug.Log($"両目を {closeDuration} 秒以上閉じました！");
+                }
             }
             else if (isOtherclose)
             {
                 isclose = false;
                 isotherclose = true;
+                durationTriggered = false;
+                blinkTimer = 0f;
 
                 if (blinkText != null)
                 {
@@ -169,6 +186,8 @@ public class BlinkDetector : MonoBehaviour
         }
         else
         {
+            durationTriggered = false;
+            blinkTimer = 0f;
             if (blinking)
             {
                 blinking = false;
@@ -187,11 +206,11 @@ public class BlinkDetector : MonoBehaviour
             }
         }
 
-        Debug.Log(
-            $"FaceWidth={faceWidth:F3} " +
-            $"LeftEAR={leftEAR:F3} " +
-            $"RightEAR={rightEAR:F3}"
-        );
+        // Debug.Log(
+        //     $"FaceWidth={faceWidth:F3} " +
+        //     $"LeftEAR={leftEAR:F3} " +
+        //     $"RightEAR={rightEAR:F3}"
+        // );
     }
 
     private void ResetBlink()
@@ -199,7 +218,9 @@ public class BlinkDetector : MonoBehaviour
         blinking = false;
         isclose = false;
         isotherclose = false;
+        durationTriggered = false;
         blinkFrameCount = 0;
+        blinkTimer = 0f;
 
         if (blinkText != null)
         {

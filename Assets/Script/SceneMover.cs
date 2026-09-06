@@ -133,7 +133,6 @@ public class SceneMover : MonoBehaviour
             {
                 blinking = true;
                 Debug.Log("BLINK");
-                SceneMove();
             }
 
             isclose = true;
@@ -149,6 +148,7 @@ public class SceneMover : MonoBehaviour
                 durationTriggered = true;
 
                 Debug.Log($"両目を {closeDuration} 秒以上閉じました！");
+                SceneMove();
 
             }
         }
