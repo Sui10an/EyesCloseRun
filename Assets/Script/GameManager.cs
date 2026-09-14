@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     [Header("サウンド")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource backgroundMusic;
+    [SerializeField] private AudioClip heartbeatSound;
     [SerializeField] private AudioClip damageSound;
     [SerializeField] private AudioClip clearSound;
     [SerializeField] private AudioClip gameOverSound;
@@ -151,9 +152,10 @@ public class GameManager : MonoBehaviour
 
         gauge.value = progress;
 
-        if (BlinkDetector.isclose)
+        if (BlinkDetector.isclose && audioSource != null && backgroundMusic != null && heartbeatSound != null)
         {
             backgroundMusic.volume = 0.5f; // 音量を下げる
+            audioSource.PlayOneShot(heartbeatSound);
         }
         else
         {
