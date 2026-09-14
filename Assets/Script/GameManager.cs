@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     [Header("サウンド")]
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource backgroundMusic;
     [SerializeField] private AudioClip damageSound;
     [SerializeField] private AudioClip clearSound;
     [SerializeField] private AudioClip gameOverSound;
@@ -149,6 +150,15 @@ public class GameManager : MonoBehaviour
         progress = Mathf.Clamp01(progress);
 
         gauge.value = progress;
+
+        if (BlinkDetector.isclose)
+        {
+            backgroundMusic.volume = 0.5f; // 音量を下げる
+        }
+        else
+        {
+            backgroundMusic.volume = 1.0f; // 音量を元に戻す
+        }
     }
 
     private void UpdateLifeUI()
