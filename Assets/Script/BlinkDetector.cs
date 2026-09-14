@@ -23,10 +23,10 @@ public class BlinkDetector : MonoBehaviour
     private int blinkFrameCount = 0;
     private bool blinking = false;
 
-    private float blinkTimer = 0f;
-    public static bool durationTriggered = false;
-    [Header("リセット時の目を閉じる時間")]
-    public float closeDuration = 3.0f;
+    //private float blinkTimer = 0f;
+    // public static bool durationTriggered = false;
+    // [Header("リセット時の目を閉じる時間")]
+    // public float closeDuration = 3.0f;
 
     public static bool isclose = false;
     public static bool isotherclose = false;
@@ -146,23 +146,23 @@ public class BlinkDetector : MonoBehaviour
                     openL.SetActive(false);
                     closedL.SetActive(true);
                 }
-                blinkTimer += Time.deltaTime;
+                // blinkTimer += Time.deltaTime;
 
-                // 指定秒数到達
+                // // 指定秒数到達
 
-                if (blinkTimer >= closeDuration && !durationTriggered)
-                {
+                // if (blinkTimer >= closeDuration && !durationTriggered)
+                // {
 
-                    durationTriggered = true;
-                    Debug.Log($"両目を {closeDuration} 秒以上閉じました！");
-                }
+                //     durationTriggered = true;
+                //     Debug.Log($"両目を {closeDuration} 秒以上閉じました！");
+                // }
             }
             else if (isOtherclose)
             {
                 isclose = false;
                 isotherclose = true;
-                durationTriggered = false;
-                blinkTimer = 0f;
+                // durationTriggered = false;
+                // blinkTimer = 0f;
 
                 if (blinkText != null)
                 {
@@ -186,8 +186,8 @@ public class BlinkDetector : MonoBehaviour
         }
         else
         {
-            durationTriggered = false;
-            blinkTimer = 0f;
+            // durationTriggered = false;
+            // blinkTimer = 0f;
             if (blinking)
             {
                 blinking = false;
@@ -218,9 +218,9 @@ public class BlinkDetector : MonoBehaviour
         blinking = false;
         isclose = false;
         isotherclose = false;
-        durationTriggered = false;
+        // durationTriggered = false;
         blinkFrameCount = 0;
-        blinkTimer = 0f;
+        // blinkTimer = 0f;
 
         if (blinkText != null)
         {

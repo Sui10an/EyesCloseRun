@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     [Header("その他")]
     [SerializeField] private Transform goalPrefab;
     public Slider gauge;
+    private float blinkTimer = 0f;
+    public float closeDuration = 3.0f;
+    public bool RetryTriggered = false;
 
     private Transform player;
     private bool isGameOver = false;
@@ -96,18 +99,28 @@ public class GameManager : MonoBehaviour
         if (isCleared || isGameOver)
         {
             autoReturn++;
+            RetryTriggered = true;
         }
         else
         {
             autoReturn = 0;
+            RetryTriggered = false;
+        }
+        if (RetryTriggered && BlinkDetector.isclose)
+        {
+            blinkTimer += Time.deltaTime;
+            if (blinkTimer >= closeDuration)
+            {
+                Retry();
+            }
+        }
+        else
+        {
+            blinkTimer = 0f;
         }
         if (autoReturn >= 10000)
         {
             RemoveTitle();
-        }
-        if (BlinkDetector.durationTriggered == true)
-        {
-            Retry();
         }
 
         if (!isGameActive || isGameOver) return;
