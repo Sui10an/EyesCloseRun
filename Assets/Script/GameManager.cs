@@ -160,6 +160,7 @@ public class GameManager : MonoBehaviour
         else
         {
             backgroundMusic.volume = 1.0f; // 音量を元に戻す
+            audioSource.Stop();
         }
     }
 
