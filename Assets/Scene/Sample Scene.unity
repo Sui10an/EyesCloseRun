@@ -9001,7 +9001,7 @@ MonoBehaviour:
   timeBonusPerSecond: 100
   audioSource: {fileID: 1625655145}
   backgroundMusic: {fileID: 1072612593}
-  heartbeatSound: {fileID: 8300000, guid: 7de5ee8db24f042919dc1aca4650866c, type: 3}
+  heartbeatSound: {fileID: 8300000, guid: e96dcc24d9acc4eedab904dede79de61, type: 3}
   damageSound: {fileID: 8300000, guid: ab1ae053914044391b527e0ba1447b48, type: 3}
   clearSound: {fileID: 8300000, guid: da5dc32087eb34e0fa2464858e9baafc, type: 3}
   gameOverSound: {fileID: 8300000, guid: a1ec0c68e33124175bb2cfc0b978ff31, type: 3}
