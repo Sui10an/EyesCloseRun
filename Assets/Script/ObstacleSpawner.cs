@@ -11,6 +11,10 @@ public class ObstacleSpawner : MonoBehaviour
 
     private float timer;
 
+    [Header("サウンド")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip fireSound;
+
     void Update()
     {
         timer += Time.deltaTime;
@@ -34,6 +38,12 @@ public class ObstacleSpawner : MonoBehaviour
 
         // X軸プラス方向へ飛ばす
         rb.linearVelocity = transform.right * bulletSpeed;
+
+        // ★追加:発射SEを再生
+        if (audioSource != null && fireSound != null)
+        {
+            audioSource.PlayOneShot(fireSound);
+        }
     }
 
 }

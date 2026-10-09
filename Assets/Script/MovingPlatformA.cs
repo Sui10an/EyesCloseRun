@@ -60,10 +60,7 @@ public class MovingPlatformA : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.transform.parent == transform)
-            {
-                collision.transform.parent.SetParent(null);
-            }
+            collision.transform.parent.SetParent(null);
         }
     }
 

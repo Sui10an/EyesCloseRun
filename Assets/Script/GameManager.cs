@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;  // TextMeshPro用
 using UnityEngine.SceneManagement;
 
@@ -21,14 +23,38 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI finalScoreText; // ← 同上
     [SerializeField] private GameObject gameOverPanel;
 
+    [Header("カウントダウン設定")]
+    [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private int countdownSeconds = 3;
+    [SerializeField] private string startMessage = "START!";
+    [SerializeField] private float startMessageDuration = 0.5f;
+
     [Header("クリア設定")]
     [SerializeField] private int timeBonusPerSecond = 100; // クリア時の残り時間ボーナス(1秒あたり)
+
+    [Header("サウンド")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource backgroundMusic;
+    [SerializeField] private AudioClip heartbeatSound;
+    [SerializeField] private AudioClip damageSound;
+    [SerializeField] private AudioClip clearSound;
+    [SerializeField] private AudioClip gameOverSound;
+
+    [Header("その他")]
+    [SerializeField] private Transform goalPrefab;
+    public Slider gauge;
+    private float blinkTimer = 0f;
+    public float closeDuration = 3.0f;
+    public bool RetryTriggered = false;
 
     private Transform player;
     private bool isGameOver = false;
     private bool isCleared = false;
 
     float start_z;
+    float goal_z;
+    float startDistance;
+    int autoReturn = 0;
 
     private void Awake()
     {
@@ -40,14 +66,65 @@ public class GameManager : MonoBehaviour
     {
         currentLife = maxLife;
         timeRemaining = timeLimit;
-        isGameActive = true;
+        isGameActive = false; // カウントダウンが終わるまで動けない
         player = FindFirstObjectByType<PlayerController>().transform;
         start_z = player.position.z;
+        goal_z = goalPrefab.transform.position.z;
+        startDistance = Vector3.Distance(player.position, goalPrefab.position);
         UpdateLifeUI();
+
+        StartCoroutine(CountdownRoutine());
+    }
+
+    private IEnumerator CountdownRoutine()
+    {
+        if (countdownText != null) countdownText.gameObject.SetActive(true);
+
+        for (int i = countdownSeconds; i > 0; i--)
+        {
+            if (countdownText != null) countdownText.text = i.ToString();
+            yield return new WaitForSeconds(1f);
+        }
+
+        if (countdownText != null)
+        {
+            countdownText.text = startMessage;
+            yield return new WaitForSeconds(startMessageDuration);
+            countdownText.gameObject.SetActive(false);
+        }
+
+        isGameActive = true;
     }
 
     private void Update()
     {
+        if (isCleared || isGameOver)
+        {
+            autoReturn++;
+            RetryTriggered = true;
+        }
+        else
+        {
+            autoReturn = 0;
+            RetryTriggered = false;
+        }
+        if (RetryTriggered && BlinkDetector.isclose)
+        {
+            blinkTimer += Time.deltaTime;
+            if (blinkTimer >= closeDuration)
+            {
+                Retry();
+            }
+        }
+        else
+        {
+            blinkTimer = 0f;
+        }
+        if (autoReturn >= 10000)
+        {
+            RemoveTitle();
+        }
+
         if (!isGameActive || isGameOver) return;
 
         timeRemaining -= Time.deltaTime;
@@ -57,6 +134,33 @@ public class GameManager : MonoBehaviour
         {
             timeRemaining = 0f;
             EndGame();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isGameActive = false;
+            RemoveTitle();
+        }
+
+        float currentDistance = Vector3.Distance(player.position, goalPrefab.position);
+        // 進捗率を計算 (0～1)
+
+        float progress = 1f - (currentDistance / startDistance);
+
+        // 範囲制限
+
+        progress = Mathf.Clamp01(progress);
+
+        gauge.value = progress;
+
+        if (BlinkDetector.isclose && audioSource != null && backgroundMusic != null && heartbeatSound != null)
+        {
+            backgroundMusic.volume = 0.5f; // 音量を下げる
+            //audioSource.PlayOneShot(heartbeat4Sound);
+        }
+        else
+        {
+            backgroundMusic.volume = 1.0f; // 音量を元に戻す
+            //audioSource.Stop();
         }
     }
 
@@ -75,7 +179,7 @@ public class GameManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(timeRemaining / 60f);
         int seconds = Mathf.FloorToInt(timeRemaining % 60f);
         timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
-        timerText.color = (timeRemaining <= 10f) ? Color.red : Color.white;
+        timerText.color = (timeRemaining <= 10f) ? Color.red : Color.black;
     }
 
     public void TakeDamage()
@@ -83,10 +187,19 @@ public class GameManager : MonoBehaviour
         if (!isGameActive || isGameOver) return;
         currentLife--;
         UpdateLifeUI();
+
         if (currentLife <= 0)
         {
+            // ライフ0の時は被弾音を鳴らさない(EndGame内でゲームオーバー音が鳴る)
             currentLife = 0;
             EndGame();
+            return;
+        }
+
+        // ★ライフが残っている時だけダメージSEを再生
+        if (audioSource != null && damageSound != null)
+        {
+            audioSource.PlayOneShot(damageSound);
         }
     }
 
@@ -107,15 +220,34 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameActive || isGameOver) return;
         isCleared = true;
+
+        // ★追加:クリアSEを再生
+        if (audioSource != null && clearSound != null)
+        {
+            audioSource.PlayOneShot(clearSound);
+        }
+
         Time.timeScale = 0f;   // プレイヤーやアニメも止める
         EndGame();
     }
+
     private void EndGame()
     {
         isGameOver = true;
         isGameActive = false;
 
+        // ★追加:ゲームオーバーSE(クリア時はGameClear側でクリアSEが鳴るので鳴らさない)
+        if (!isCleared && audioSource != null && gameOverSound != null)
+        {
+            audioSource.PlayOneShot(gameOverSound);
+        }
+
         int score = CalculateScore();
+
+        // ★ここから追加:ランキングに登録して順位を取得
+        int rank = RankingManager.AddScore(score, isCleared);
+        RankingDisplay.lastRank = rank;
+        // ★ここまで追加
 
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
@@ -123,25 +255,37 @@ public class GameManager : MonoBehaviour
         if (finalScoreText != null)
         {
             string title = isCleared ? "GAME CLEAR!" : "GAME OVER";
+
+            // ★追加:ランクインしていれば順位の行を作る
+            string rankLine = rank > 0 ? $"ランキング {rank}位!\n" : "";
+
             finalScoreText.text =
                 $"{title}\n" +
+                rankLine +                                                     // ★追加
                 $"スコア：{score}\n" +
-                $"進んだ距離：{Mathf.FloorToInt(player.position.z - start_z)}m\n" +
+                $"ゴールまでの距離：{Mathf.FloorToInt(goal_z - player.position.z)}m\n" +
                 $"残りHP：{currentLife}/{maxLife}";
         }
     }
 
     public void Retry()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().name);
+        if (!isGameActive)
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(
+                SceneManager.GetActiveScene().name);
+        }
     }
     public void RemoveTitle()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(
-            "TitleScene");
+        if (!isGameActive)
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(
+                "TitleScene");
+        }
+
     }
 
     public bool IsGameOver => isGameOver;
