@@ -155,12 +155,12 @@ public class GameManager : MonoBehaviour
         if (BlinkDetector.isclose && audioSource != null && backgroundMusic != null && heartbeatSound != null)
         {
             backgroundMusic.volume = 0.5f; // 音量を下げる
-            audioSource.PlayOneShot(heartbeatSound);
+            //audioSource.PlayOneShot(heartbeat4Sound);
         }
         else
         {
             backgroundMusic.volume = 1.0f; // 音量を元に戻す
-            audioSource.Stop();
+            //audioSource.Stop();
         }
     }
 

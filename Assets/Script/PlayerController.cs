@@ -25,12 +25,12 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime, Space.World);
             // Debug.Log("Go!!");
         }
-        else if ((BlinkDetector.isotherclose || Input.GetKey(KeyCode.S)) && GameManager.isGameActive == true)
-        {
-            animator.SetBool("isWalking", false);
-            animator.SetBool("isBack", true);
-            transform.Translate(Vector3.back * backSpeed * Time.deltaTime, Space.World);
-        }
+        // else if ((BlinkDetector.isotherclose || Input.GetKey(KeyCode.S)) && GameManager.isGameActive == true)
+        // {
+        //     animator.SetBool("isWalking", false);
+        //     animator.SetBool("isBack", true);
+        //     transform.Translate(Vector3.back * backSpeed * Time.deltaTime, Space.World);
+        // }
         else
         {
             animator.SetBool("isWalking", false);
