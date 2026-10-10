@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         {
             blinkTimer = 0f;
         }
-        if (autoReturn >= 10000)
+        if (autoReturn >= 3000)
         {
             RemoveTitle();
         }
