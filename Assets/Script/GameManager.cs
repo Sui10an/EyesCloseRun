@@ -124,6 +124,16 @@ public class GameManager : MonoBehaviour
         {
             RemoveTitle();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isGameActive = false;
+            RemoveTitle();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            isGameActive = false;
+            Retry();
+        }
 
         if (!isGameActive || isGameOver) return;
 
@@ -134,11 +144,6 @@ public class GameManager : MonoBehaviour
         {
             timeRemaining = 0f;
             EndGame();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isGameActive = false;
-            RemoveTitle();
         }
 
         float currentDistance = Vector3.Distance(player.position, goalPrefab.position);
